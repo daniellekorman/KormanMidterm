@@ -2,8 +2,8 @@
 #'
 #' Takes function information and integrates either using Trapezoid or Simpson's Rule
 #'
-#' @param fun The function to apply to x
 #' @param x A numeric vector of values
+#' @param y A numeric vector of values
 #' @param a Start value of integration
 #' @param b End value of integration
 #' @param Rule chooses Trap or Simp depending on rule to apply
@@ -17,28 +17,27 @@
 #' @note ??
 #' @examples
 #'
-#' fun <- cos(x)
-#' x <- c(1:100)
-#' integrateIt(fun, x, a=5, b=10, Rule="Trap", n=6)
+#' x <- 1:100
+#' y <- cos(x)
+#' integrateIt(x, y, a=5, b=10, Rule="Trap", n=6)
 #' @rdname integrateIt
 #' @aliases integrateIt,ANY-method
 #' @export
 # set the generic method for integrateIt
 setGeneric(name="integrateIt",
-           def=function(fun, x, a, b, Rule, n)
+           def=function(x, y, a, b, Rule, n)
            {standardGeneric("integrateIt")}
 )
 
 #' @export
 # creates method integrateIt
 setMethod(f="integrateIt",
-          definition=function(fun, x, a, b, Rule, n) {
-            y <- fun(x)
+          definition=function(x, y, a, b, Rule, n) {
             if(Rule=="Trap"){
-              return(new("Trapezoid"))
+              return(new("Trapezoid", x=x, y=y, a=a, b=b, n=n, integral=integral))
             }
             if(Rule=="Simp"){
-              return(new("Simp"))
+              return(new("Simpson", x=x, y=y, a=a, b=b, n=n, integral=integral))
             }
-            else(print("This is not one of the two integration rules"))
+          }
 )

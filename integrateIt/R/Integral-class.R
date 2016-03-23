@@ -24,8 +24,7 @@ setClass(Class = "Integral",
            y="vector",
            a="numeric",
            b="numeric",
-           n="numeric",
-           integral="numeric"),
+           n="numeric"),
          prototype = prototype(
            x=vector(),
            y=vector(),
@@ -57,6 +56,6 @@ setMethod("initialize", "Integral",
 )
 #' @export
 setMethod("print", "Integral", function(object) {
-  paste(c(object@x, object@y, object@integral))
+  paste(c(object@integral))
 }
 )
