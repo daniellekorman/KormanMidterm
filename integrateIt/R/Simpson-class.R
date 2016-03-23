@@ -50,7 +50,11 @@ setMethod("initialize", "Simpson",
             return(value)
           }
 )
-
+#' @export
+ setMethod("plot", "Simpson",
+           function(){
+             segments(x0=a, y0=...)
+           })
 ##
 setAs(from="Integral", to="Simpson",
       def=function(from){

@@ -44,6 +44,11 @@ setMethod("initialize", "Trapezoid",
             return(value)
           }
 )
+#' @export
+ setMethod("plot", "Trapezoid",
+           function(){
+             segments(x0=a, y0=y[a], x1=, y1=y[b], )
+           })
 ##
 setAs(from="Integral", to="Trapezoid",
       def=function(from){
