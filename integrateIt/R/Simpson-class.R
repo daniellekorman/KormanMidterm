@@ -1,24 +1,24 @@
-#' Trapezoidal Integration
+#' Simpson's Rule
 #'
-#' Object of class \code{Trapezoid} as created by the \code{integrateIt} function. Objects
+#' Object of class \code{Simpson} as created by the \code{integrateIt} function. Objects
 #' of this class include \code{print} and \code{plot} methods
 #'
 #'
-#' An object of the class `Trapezoid' has the following slots:
+#' An object of the class `Simpson' has the following slots:
 #' \itemize{
 #' \item \code{x} A numerical vector of inputs to the function
 #' \item \code{y} A numerical vector of function outputs
 #' \item \code{a} Starting value of integration
 #' \item \code{b} Ending value of integration
-#' \item \code{n} Number of trapezoids between a and b
-#' \item \code{integral} The result of Trapezoidal Rule calculation
+#' \item \code{n} Number of parabolas between a and b
+#' \item \code{integral} The result of Simpson's Rule calculation
 #' }
 #'
 #' @author Danielle Korman
-#' @aliases Trapezoid-class initialize,Trapezoid-method integrateIt
+#' @aliases Simpson-class initialize,Simpson-method integrateIt
 #' @rdname Integral
 #' @export
-setClass(Class = "Trapezoid",
+setClass(Class = "Simpson",
          representation=representation(
            x="vector",
            y="vector",
@@ -29,7 +29,7 @@ setClass(Class = "Trapezoid",
          contains = "Integral"
 )
 #' @export
-setMethod("initialize", "Trapezoid",
+setMethod("initialize", "Simpson",
           function(.Object, x, y, a, b, n, integral) {
             .Object@x <- x
             .Object@y <- y
@@ -38,7 +38,8 @@ setMethod("initialize", "Trapezoid",
             .Object@n <- n
             .Object@integral <- function(x, y, a, b, n){
               h <- (b-a)/n
-              t <- (h/2) * (y[1] + 2*sum(y[2:n]) + y[n+1])
+             s <- (h/3)*(y[1]+ 2*sum(y[seq(2,n,by=2)]) + 4*sum(y[seq(3,n-1,by=2)])
+                         + y[n+1])
             }
             value=callNextMethod()
             return(value)
@@ -46,9 +47,9 @@ setMethod("initialize", "Trapezoid",
 )
 
 ##
-setAs(from="Integral", to="Trapezoid",
+setAs(from="Integral", to="Simpson",
       def=function(from){
-        new("Trapezoid",
+        new("Simpson",
             x=from@x,
             y=from@y,
             integral=from@integral
