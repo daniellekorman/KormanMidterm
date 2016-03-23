@@ -30,4 +30,26 @@ setClass(Class = "Integral",
            a=numeric(),
            b=numeric(),
            integral=numeric()
-         ))
+         ),
+         validity = function(object){
+           if(object@b < object@a){
+             return("Switch values so that b is larger than a")
+           }
+         })
+#' @export
+setMethod("initialize", "Integral",
+          function(.Object, x, y, a, b, integral) {
+            .Object@x <- x
+            .Object@y <- y
+            .Object@a <- a
+            .Object@b <- b
+            .Object@integral <- integral
+            value=callNextMethod()
+            return(value)
+          }
+)
+#' @export
+setMethod("print", "Integral", function(object) {
+  paste(c(object@x, object@y, object@integral))
+}
+)
