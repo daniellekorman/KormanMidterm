@@ -26,7 +26,12 @@ setClass(Class = "Simpson",
            b="numeric",
            n="numeric",
            integral="numeric"),
-         contains = "Integral"
+         contains = "Integral",
+         validity = function(object){
+           if(n%%2==1){
+             stop("n must be an even number for Simpson's rule")
+           }
+         }
 )
 #' @export
 setMethod("initialize", "Simpson",

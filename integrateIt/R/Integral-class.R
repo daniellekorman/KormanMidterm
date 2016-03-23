@@ -36,7 +36,10 @@ setClass(Class = "Integral",
          ),
          validity = function(object){
            if(object@b < object@a){
-             return("Switch values so that b is larger than a")
+             stop("Switch values so that b is larger than a")
+           }
+           if(is_integer(object@n) =FALSE || object@n < 1){
+             stop("n must be a positive integer")
            }
          })
 #' @export
