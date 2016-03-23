@@ -1,8 +1,8 @@
 Package: integrateIt
-Title: What the Package Does (one line, title case)
+Title: Trapezoid and Simpson's Rule
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
+Authors@R: person("Danielle", "Korman", email = "first.last@example.com", role = c("aut", "cre"))
+Description: Estimates the integral of a function using either Trapezoid Rule or Simpson's Rule
 Depends: R (>= 3.1.2)
 License: What license is it under?
 LazyData: true

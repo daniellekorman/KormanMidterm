@@ -24,7 +24,8 @@ setClass(Class = "Trapezoid",
            y="vector",
            a="numeric",
            b="numeric",
-           n="numeric"),
+           n="numeric",
+           integral="function"),
          contains = "Integral"
 )
 #' @export
@@ -35,24 +36,12 @@ setMethod("initialize", "Trapezoid",
             .Object@a <- a
             .Object@b <- b
             .Object@n <- n
-            .Object@integral <- integral
+            .Object@integral <- function(object){
+              h <- (object@b-object@a)/object@n
+              t <- (h/2) * (object@y[1] + 2*sum(object@y[2:object@n]) + object@y[object@n+1])
+              return(t) }
             value=callNextMethod()
             return(value)
-          }
-)
-#' @rdname Integral
-#' @export
-setGeneric("traprule",
-           function(object="Trapezoid")  {
-             standardGeneric("traprule")
-           }
-)
-#' @export
-setMethod("traprule", "Trapezoid",
-          function(object){
-            h <- (object@b-object@a)/object@n
-            t <- (h/2) * (object@y[1] + 2*sum(object@y[2:object@n]) + object@y[object@n+1])
-            return(object@integral)
           }
 )
 ##

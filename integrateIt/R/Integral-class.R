@@ -24,14 +24,15 @@ setClass(Class = "Integral",
            y="vector",
            a="numeric",
            b="numeric",
-           n="numeric"),
+           n="numeric",
+           integral="function"),
          prototype = prototype(
            x=vector(),
            y=vector(),
            a=numeric(),
            b=numeric(),
            n=numeric(),
-           integral=numeric()
+           integral=function()
          ),
          validity = function(object){
            if(object@b < object@a){
