@@ -10,6 +10,7 @@
 #' \item \code{y} A numerical vector of function outputs
 #' \item \code{a} Starting value of integration
 #' \item \code{b} Ending value of integration
+#' \item \code{n} Number of divisions to make between a and b
 #' \item \code{integral} Either the Trapezoid or Simpson Rule area under the curve
 #' }
 #'
@@ -23,12 +24,14 @@ setClass(Class = "Integral",
            y="vector",
            a="numeric",
            b="numeric",
+           n="numeric",
            integral="numeric"),
          prototype = prototype(
            x=vector(),
            y=vector(),
            a=numeric(),
            b=numeric(),
+           n=numeric(),
            integral=numeric()
          ),
          validity = function(object){
@@ -38,11 +41,12 @@ setClass(Class = "Integral",
          })
 #' @export
 setMethod("initialize", "Integral",
-          function(.Object, x, y, a, b, integral) {
+          function(.Object, x, y, a, b, n, integral) {
             .Object@x <- x
             .Object@y <- y
             .Object@a <- a
             .Object@b <- b
+            .Object@n <- n
             .Object@integral <- integral
             value=callNextMethod()
             return(value)
